@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170327_063011_balance_table extends Migration
+class m170327_063011_transaction_table extends Migration
 {
    public function up()
     {
