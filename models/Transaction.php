@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
@@ -16,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Transaction extends \yii\db\ActiveRecord
+class Transaction extends ActiveRecord
 {
 	
 		    public function  behaviors()
