@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$user = Yii::$app->user->identity;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@ AppAsset::register($this);
 	          ['label' => 'Главная', 'url' => ['/site/index']]   
              ):(
 	          '<li>'.Html::a('Профиль',Url::toRoute(['/site/index'])).'</li>'.
-	          '<li class="balance">Баланс: '.Yii::$app->user->identity->balance.'</li>' 
+	          '<li class="balance">Баланс: '.$user->balance.'</li>'
              ),
               Yii::$app->user->isGuest ? (
                 ['label' => 'Войти/Зарегистрироваться', 'url' => ['/site/login']]
@@ -49,7 +50,7 @@ AppAsset::register($this);
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Выйти (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . $user->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
