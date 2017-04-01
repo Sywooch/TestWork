@@ -8,14 +8,20 @@ use yii\behaviors\TimestampBehavior;
 
 class User extends ActiveRecord implements IdentityInterface
 {
+    /**
+     * Определим переменную $users
+     */
 	static $users = [];
-	
+
+    /**
+     * поведение для полей регистрации и изменения(редактирования)
+     */
 	    public function  behaviors()
     {
         return [
             [
                 'class' => TimestampBehavior::className(),
-                'attributes' => [                  
+                'attributes' => [
                     ActiveRecord :: EVENT_BEFORE_INSERT => ['created_at'],
                     ActiveRecord :: EVENT_BEFORE_UPDATE => ['updated_at'],
                 ],
@@ -24,7 +30,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 	 /**
-     * @inheritdoc
+     * имя базы даннях с учетом возможного использования префикса в таблицах
      */
     public static function tableName()
     {
@@ -32,7 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * правила полей
      */
     public function rules()
     {
@@ -47,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * метки полей
      */
     public function attributeLabels()
     {
@@ -60,7 +66,10 @@ class User extends ActiveRecord implements IdentityInterface
             'updated_at' => 'Изменен',
         ];
     }
-    
+
+    /**
+     * Генерируем рандомную строку при регистрации для контроля авторизации (надо бы лаконичней описать)
+     */
     public function beforeSave($insert){
         if (parent::beforeSave($insert)){
             if ($this->isNewRecord){
@@ -93,7 +102,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->id;
     }
-    
+
+    /**
+     * Пользователь по имени
+     */
         static function findByUsername($username)
     {
         return static::findOne(['username' => $username]);

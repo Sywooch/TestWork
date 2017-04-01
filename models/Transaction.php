@@ -5,20 +5,13 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
-/**
- * This is the model class for table "{{%transaction}}".
- *
- * @property integer $id
- * @property integer $sender_id
- * @property integer $recipient_id
- * @property integer $sum
- * @property integer $created_at
- * @property integer $updated_at
- */
+
 class Transaction extends ActiveRecord
 {
-	
-		    public function  behaviors()
+    /**
+     * поведение для полей создания и изменения(редактирования)
+     */
+	public function  behaviors()
     {
         return [
             [
@@ -32,7 +25,7 @@ class Transaction extends ActiveRecord
 
     }
     /**
-     * @inheritdoc
+     * имя базы даннях с учетом возможного использования префикса в таблицах
      */
     public static function tableName()
     {
@@ -40,7 +33,7 @@ class Transaction extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * правила полей
      */
     public function rules()
     {
@@ -54,7 +47,7 @@ class Transaction extends ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * метки полей
      */
     public function attributeLabels()
     {

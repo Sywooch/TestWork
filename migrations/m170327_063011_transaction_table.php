@@ -6,6 +6,9 @@ class m170327_063011_transaction_table extends Migration
 {
    public function up()
     {
+        /**
+         * миграция для создания таблички с переводами
+         */
         $this->createTable('{{%transaction}}', [
             'id' => $this->primaryKey(11)->unsigned()->comment('ID перевода'),
             'sender_name' => $this->string(48)->notNull()->comment('Имя отправителя'),

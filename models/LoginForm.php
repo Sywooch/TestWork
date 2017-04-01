@@ -31,7 +31,9 @@ class LoginForm extends Model
         ];
     }
 
-
+    /**
+     * метки полей
+     */
     public function attributeLabels()
     {
         return [
@@ -45,11 +47,15 @@ class LoginForm extends Model
     {
         if ($this->validate()) {
             if (!$this->getUser()) {
-                // регистрация
+                /**
+                 * регистрация
+                 */
                 $user = new User();
                 $user->username = $this->username;
                 $user->save();
-                //Авторизация
+                /**
+                 * Авторизация
+                 */
                 return Yii::$app->user->login($user,
                     $this->rememberMe ? 3600 * 24 * 30 : 0);
             }

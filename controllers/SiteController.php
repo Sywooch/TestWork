@@ -21,17 +21,17 @@ class SiteController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    [
-                        'actions' => ['logout','transaction'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
+                    [ // Главная доступна гостям и авторизованным
                         'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['?','@'],
                     ],
-                    [
+                    [ // только авторизованные пользователи могут переводить "попугаев" и выйти
+                        'actions' => ['logout','transaction'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [ // Войти могут только гости
                         'actions' => ['login'],
                         'allow' => true,
                         'roles' => ['?'],
@@ -58,16 +58,18 @@ class SiteController extends Controller
     }
 
 
-    /*
-        *
-        * Экшн главной/профиля
-        *
+    /**
+    *
+    * Экшн главной/профиля
+    *
     */
 
     public function actionIndex()
     {
-        // Если пользователь зашел как гость, грузим представление для гостя "index",
-        //в противном случае грузим представление профиля "index-user"
+        /**
+         * Если пользователь зашел как гость, грузим представление для гостя "index",
+         * в противном случае грузим представление профиля "index-user"
+         */
 
         if (Yii::$app->user->isGuest) {
             return $this->render('index');
@@ -144,7 +146,7 @@ class SiteController extends Controller
     }
 
 
-    /*
+    /**
         *
         * Экшн входа/регистрации с последующим переходом на главную(профиль)
         *
@@ -166,7 +168,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /*
+    /**
         *
         * Экшн выхода и редирект на главную
         *
