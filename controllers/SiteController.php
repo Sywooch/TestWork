@@ -20,12 +20,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout','transaction'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['?','@'],
+                    ],
+                    [
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -82,7 +91,7 @@ class SiteController extends Controller
 
     /*
        *
-       * Экшн осуществления переводов "попугаев" медлу пользователями.
+       * Экшн осуществления переводов "попугаев" между пользователями.
        *
    */
     public function actionTransaction()
